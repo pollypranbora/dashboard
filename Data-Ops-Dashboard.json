@@ -1,0 +1,1857 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "dashboardName": {
+            "type": "string"
+        }
+    },
+    "variables": {},
+    "resources": [
+        {
+            "name": "[parameters('dashboardName')]",
+            "type": "Microsoft.Portal/dashboards",
+            "location": "eastus2",
+            "tags": {
+                "hidden-title": "[parameters('dashboardName')]"
+            },
+            "apiVersion": "2015-08-01-preview",
+            "properties": {
+                "lenses": {
+                    "0": {
+                        "order": 0,
+                        "parts": {
+                            "0": {
+                                "position": {
+                                    "x": 0,
+                                    "y": 0,
+                                    "colSpan": 2,
+                                    "rowSpan": 2
+                                },
+                                "metadata": {
+                                    "inputs": [],
+                                    "type": "Extension/HubsExtension/PartType/ClockPart",
+                                    "settings": {}
+                                }
+                            },
+                            "1": {
+                                "position": {
+                                    "x": 2,
+                                    "y": 0,
+                                    "colSpan": 4,
+                                    "rowSpan": 2
+                                },
+                                "metadata": {
+                                    "inputs": [],
+                                    "type": "Extension/HubsExtension/PartType/HelpAndSupportPart"
+                                }
+                            },
+                            "2": {
+                                "position": {
+                                    "x": 6,
+                                    "y": 0,
+                                    "colSpan": 11,
+                                    "rowSpan": 5
+                                },
+                                "metadata": {
+                                    "inputs": [
+                                        {
+                                            "name": "resourceTypeMode",
+                                            "isOptional": true
+                                        },
+                                        {
+                                            "name": "ComponentId",
+                                            "isOptional": true
+                                        },
+                                        {
+                                            "name": "Scope",
+                                            "value": {
+                                                "resourceIds": [
+                                                    "/subscriptions/89bc2ebd-411c-4cd0-96c6-15d201e3a28b/resourcegroups/synapse/providers/microsoft.operationalinsights/workspaces/pollybloganalytics"
+                                                ]
+                                            },
+                                            "isOptional": true
+                                        },
+                                        {
+                                            "name": "PartId",
+                                            "value": "843b9ca1-02b7-484d-9745-d42cdc5e1be4",
+                                            "isOptional": true
+                                        },
+                                        {
+                                            "name": "Version",
+                                            "value": "2.0",
+                                            "isOptional": true
+                                        },
+                                        {
+                                            "name": "TimeRange",
+                                            "value": "P1D",
+                                            "isOptional": true
+                                        },
+                                        {
+                                            "name": "DashboardId",
+                                            "isOptional": true
+                                        },
+                                        {
+                                            "name": "DraftRequestParameters",
+                                            "isOptional": true
+                                        },
+                                        {
+                                            "name": "Query",
+                                            "value": "ADFPipelineRun\n| where Status in ('Succeeded', 'Failed')\n| extend PipelineDuration = iif(Status in ('Succeeded', 'Failed'),datetime_diff('second', End, Start),0)\n| extend TriggerId = tostring(parse_json(Predecessors)[0].Id)\n| join kind = leftouter (\n            ADFTriggerRun\n                | project TriggerId, TriggerName\n        ) on $left.TriggerId == $right.TriggerId\n| project Start, TriggerName, TriggerId, PipelineName, RunId, PipelineDuration, Status\n\n",
+                                            "isOptional": true
+                                        },
+                                        {
+                                            "name": "ControlType",
+                                            "value": "FrameControlChart",
+                                            "isOptional": true
+                                        },
+                                        {
+                                            "name": "SpecificChart",
+                                            "value": "Line",
+                                            "isOptional": true
+                                        },
+                                        {
+                                            "name": "PartTitle",
+                                            "value": "Analytics",
+                                            "isOptional": true
+                                        },
+                                        {
+                                            "name": "PartSubTitle",
+                                            "value": "pollybloganalytics",
+                                            "isOptional": true
+                                        },
+                                        {
+                                            "name": "Dimensions",
+                                            "value": {
+                                                "xAxis": {
+                                                    "name": "Start",
+                                                    "type": "datetime"
+                                                },
+                                                "yAxis": [
+                                                    {
+                                                        "name": "PipelineDuration",
+                                                        "type": "long"
+                                                    }
+                                                ],
+                                                "splitBy": [
+                                                    {
+                                                        "name": "PipelineName",
+                                                        "type": "string"
+                                                    }
+                                                ],
+                                                "aggregation": "Sum"
+                                            },
+                                            "isOptional": true
+                                        },
+                                        {
+                                            "name": "LegendOptions",
+                                            "value": {
+                                                "isEnabled": true,
+                                                "position": "Bottom"
+                                            },
+                                            "isOptional": true
+                                        },
+                                        {
+                                            "name": "IsQueryContainTimeRange",
+                                            "value": false,
+                                            "isOptional": true
+                                        }
+                                    ],
+                                    "type": "Extension/Microsoft_OperationsManagementSuite_Workspace/PartType/LogsDashboardPart",
+                                    "settings": {
+                                        "content": {
+                                            "PartTitle": "Azure Data Factory",
+                                            "PartSubTitle": "Execution In Seconds By Pipeline"
+                                        }
+                                    }
+                                }
+                            },
+                            "3": {
+                                "position": {
+                                    "x": 17,
+                                    "y": 0,
+                                    "colSpan": 21,
+                                    "rowSpan": 5
+                                },
+                                "metadata": {
+                                    "inputs": [
+                                        {
+                                            "name": "resourceTypeMode",
+                                            "isOptional": true
+                                        },
+                                        {
+                                            "name": "ComponentId",
+                                            "isOptional": true
+                                        },
+                                        {
+                                            "name": "Scope",
+                                            "value": {
+                                                "resourceIds": [
+                                                    "/subscriptions/89bc2ebd-411c-4cd0-96c6-15d201e3a28b/resourcegroups/synapse/providers/microsoft.operationalinsights/workspaces/pollybloganalytics"
+                                                ]
+                                            },
+                                            "isOptional": true
+                                        },
+                                        {
+                                            "name": "PartId",
+                                            "value": "2b9e12f2-5e00-4d9d-87e8-a91584c2e78e",
+                                            "isOptional": true
+                                        },
+                                        {
+                                            "name": "Version",
+                                            "value": "2.0",
+                                            "isOptional": true
+                                        },
+                                        {
+                                            "name": "TimeRange",
+                                            "value": "P1D",
+                                            "isOptional": true
+                                        },
+                                        {
+                                            "name": "DashboardId",
+                                            "isOptional": true
+                                        },
+                                        {
+                                            "name": "DraftRequestParameters",
+                                            "isOptional": true
+                                        },
+                                        {
+                                            "name": "Query",
+                                            "value": "ADFActivityRun \n//| where TimeGenerated > ago(80m)\n| where Level == 'Error'\n| extend Error_Message = tostring(parse_json(Error).message)\n| extend Error_Target = tostring(parse_json(Error).target)\n| join  kind = leftouter (\n        ADFPipelineRun    \n            | extend TriggerId = tostring(parse_json(Predecessors)[0].Id)\n            | join   kind = leftouter (\n                    ADFTriggerRun\n                    | project TriggerId, TriggerName\n                    ) on $left.TriggerId == $right.TriggerId\n            | project TriggerName, TriggerId, RunId\n        ) on $left.PipelineRunId == $right.RunId\n| extend ActivityDuration = iif(Status in ('Succeeded', 'Failed'),datetime_diff('second', End, Start),0)\n// TriggerId, PipelineId, ActivityId, ActivityType, \n// Did the activity Retry?\n| project TriggerName, TriggerId, PipelineName, PipelineRunId, ActivityName, ActivityRunId, ActivityType, Level, Status, FailureType, ErrorCode, ErrorMessage\n\n",
+                                            "isOptional": true
+                                        },
+                                        {
+                                            "name": "ControlType",
+                                            "value": "AnalyticsGrid",
+                                            "isOptional": true
+                                        },
+                                        {
+                                            "name": "SpecificChart",
+                                            "isOptional": true
+                                        },
+                                        {
+                                            "name": "PartTitle",
+                                            "value": "Analytics",
+                                            "isOptional": true
+                                        },
+                                        {
+                                            "name": "PartSubTitle",
+                                            "value": "pollybloganalytics",
+                                            "isOptional": true
+                                        },
+                                        {
+                                            "name": "Dimensions",
+                                            "isOptional": true
+                                        },
+                                        {
+                                            "name": "LegendOptions",
+                                            "isOptional": true
+                                        },
+                                        {
+                                            "name": "IsQueryContainTimeRange",
+                                            "value": false,
+                                            "isOptional": true
+                                        }
+                                    ],
+                                    "type": "Extension/Microsoft_OperationsManagementSuite_Workspace/PartType/LogsDashboardPart",
+                                    "settings": {
+                                        "content": {
+                                            "GridColumnsWidth": {
+                                                "ErrorMessage": "547px",
+                                                "Error_Details": "703.984px",
+                                                "TriggerName": "282px"
+                                            },
+                                            "Query": "ADFActivityRun \n//| where TimeGenerated > ago(1d)\n| where Status == 'Failed'\n| extend Error_Message = tostring(parse_json(Error).message)\n| extend Error_Target = tostring(parse_json(Error).target)\n| extend e_Resource = tostring(array_reverse(split(tolower(_ResourceId), '/'))[0])\n| join  kind = leftouter (\n        ADFPipelineRun    \n            | extend TriggerId = tostring(parse_json(Predecessors)[0].Id)\n            | join   kind = leftouter (\n                    ADFTriggerRun\n                    | project TriggerId, TriggerName\n                    ) on $left.TriggerId == $right.TriggerId\n            | project TriggerName, TriggerId, RunId\n        ) on $left.PipelineRunId == $right.RunId\n| extend ActivityDuration = iif(Status in ('Succeeded', 'Failed'),datetime_diff('second', End, Start),0)\n// TriggerId, PipelineId, ActivityId, ActivityType, \n// Did the activity Retry?\n| extend Error_Details = split(split(ErrorMessage, 'ErrorCode:')[1], 'RequestId:')[0]\n| project TimeGenerated, e_Resource, TriggerName, PipelineName,  ActivityName, ActivityType, Level, Status, FailureType, ErrorCode, ErrorMessage, TriggerId, PipelineRunId, ActivityRunId\n| order by TimeGenerated desc \n\n",
+                                            "PartTitle": "Azure Data Factory",
+                                            "PartSubTitle": "Recent Error Details",
+                                            "IsQueryContainTimeRange": false
+                                        }
+                                    }
+                                }
+                            },
+                            "4": {
+                                "position": {
+                                    "x": 38,
+                                    "y": 0,
+                                    "colSpan": 6,
+                                    "rowSpan": 5
+                                },
+                                "metadata": {
+                                    "inputs": [
+                                        {
+                                            "name": "resourceTypeMode",
+                                            "isOptional": true
+                                        },
+                                        {
+                                            "name": "ComponentId",
+                                            "isOptional": true
+                                        },
+                                        {
+                                            "name": "Scope",
+                                            "value": {
+                                                "resourceIds": [
+                                                    "/subscriptions/89bc2ebd-411c-4cd0-96c6-15d201e3a28b/resourcegroups/synapse/providers/microsoft.operationalinsights/workspaces/pollybloganalytics"
+                                                ]
+                                            },
+                                            "isOptional": true
+                                        },
+                                        {
+                                            "name": "PartId",
+                                            "value": "40172a10-3464-4dd8-a42e-9ed48b8a9e0a",
+                                            "isOptional": true
+                                        },
+                                        {
+                                            "name": "Version",
+                                            "value": "2.0",
+                                            "isOptional": true
+                                        },
+                                        {
+                                            "name": "TimeRange",
+                                            "value": "P7D",
+                                            "isOptional": true
+                                        },
+                                        {
+                                            "name": "DashboardId",
+                                            "isOptional": true
+                                        },
+                                        {
+                                            "name": "DraftRequestParameters",
+                                            "isOptional": true
+                                        },
+                                        {
+                                            "name": "Query",
+                                            "value": "ADFActivityRun \n//| where TimeGenerated > ago(180m) \n| join  kind = leftouter (\n        ADFPipelineRun    \n            | extend TriggerId = tostring(parse_json(Predecessors)[0].Id)\n            | join   kind = leftouter (\n                    ADFTriggerRun\n                    | project TriggerId, TriggerName\n                    ) on $left.TriggerId == $right.TriggerId\n            | project TriggerName, TriggerId, RunId\n        ) on $left.PipelineRunId == $right.RunId\n| extend ActivityDuration = iif(Status in ('Succeeded', 'Failed'),datetime_diff('second', End, Start),0)\n| project ActivityName, Start, End, ActivityDuration, PipelineName, TriggerName, ActivityType\n| summarize Avg_Duration = avg(ActivityDuration), Max_Duration = max(ActivityDuration) by TriggerName, PipelineName, ActivityName, ActivityType\n| order by Max_Duration, Avg_Duration\n| limit 5\n",
+                                            "isOptional": true
+                                        },
+                                        {
+                                            "name": "ControlType",
+                                            "value": "FrameControlChart",
+                                            "isOptional": true
+                                        },
+                                        {
+                                            "name": "SpecificChart",
+                                            "value": "UnstackedColumn",
+                                            "isOptional": true
+                                        },
+                                        {
+                                            "name": "PartTitle",
+                                            "value": "Analytics",
+                                            "isOptional": true
+                                        },
+                                        {
+                                            "name": "PartSubTitle",
+                                            "value": "pollybloganalytics",
+                                            "isOptional": true
+                                        },
+                                        {
+                                            "name": "Dimensions",
+                                            "value": {
+                                                "xAxis": {
+                                                    "name": "ActivityType",
+                                                    "type": "string"
+                                                },
+                                                "yAxis": [
+                                                    {
+                                                        "name": "Avg_Duration",
+                                                        "type": "real"
+                                                    }
+                                                ],
+                                                "splitBy": [
+                                                    {
+                                                        "name": "TriggerName",
+                                                        "type": "string"
+                                                    }
+                                                ],
+                                                "aggregation": "Sum"
+                                            },
+                                            "isOptional": true
+                                        },
+                                        {
+                                            "name": "LegendOptions",
+                                            "value": {
+                                                "isEnabled": true,
+                                                "position": "Bottom"
+                                            },
+                                            "isOptional": true
+                                        },
+                                        {
+                                            "name": "IsQueryContainTimeRange",
+                                            "value": false,
+                                            "isOptional": true
+                                        }
+                                    ],
+                                    "type": "Extension/Microsoft_OperationsManagementSuite_Workspace/PartType/LogsDashboardPart",
+                                    "settings": {
+                                        "content": {
+                                            "PartTitle": "Azure Data Factory",
+                                            "PartSubTitle": "Activity Types Average Duration"
+                                        }
+                                    }
+                                }
+                            },
+                            "5": {
+                                "position": {
+                                    "x": 44,
+                                    "y": 0,
+                                    "colSpan": 6,
+                                    "rowSpan": 5
+                                },
+                                "metadata": {
+                                    "inputs": [
+                                        {
+                                            "name": "resourceTypeMode",
+                                            "isOptional": true
+                                        },
+                                        {
+                                            "name": "ComponentId",
+                                            "isOptional": true
+                                        },
+                                        {
+                                            "name": "Scope",
+                                            "value": {
+                                                "resourceIds": [
+                                                    "/subscriptions/89bc2ebd-411c-4cd0-96c6-15d201e3a28b/resourcegroups/synapse/providers/microsoft.operationalinsights/workspaces/pollybloganalytics"
+                                                ]
+                                            },
+                                            "isOptional": true
+                                        },
+                                        {
+                                            "name": "PartId",
+                                            "value": "10b9119b-998b-4cf7-ad87-e6950515d3c9",
+                                            "isOptional": true
+                                        },
+                                        {
+                                            "name": "Version",
+                                            "value": "2.0",
+                                            "isOptional": true
+                                        },
+                                        {
+                                            "name": "TimeRange",
+                                            "value": "P1D",
+                                            "isOptional": true
+                                        },
+                                        {
+                                            "name": "DashboardId",
+                                            "isOptional": true
+                                        },
+                                        {
+                                            "name": "DraftRequestParameters",
+                                            "isOptional": true
+                                        },
+                                        {
+                                            "name": "Query",
+                                            "value": "//todecimal(parse_json(tostring(parse_json(tostring(Output_Json.billingReference)).billableDuration))[0].duration)\nADFActivityRun \n//| where TimeGenerated > ago(180m) \n| join  kind = leftouter (\n        ADFPipelineRun    \n            | extend TriggerId = tostring(parse_json(Predecessors)[0].Id)\n            | join   kind = leftouter (\n                    ADFTriggerRun\n                    | project TriggerId, TriggerName\n                    ) on $left.TriggerId == $right.TriggerId\n            | project TriggerName, TriggerId, RunId\n        ) on $left.PipelineRunId == $right.RunId\n| extend ActivityDuration = iif(Status in ('Succeeded', 'Failed'),datetime_diff('second', End, Start),0)\n| extend Output_Json = parse_json(Output)\n| extend BillableDuration = todecimal(parse_json(tostring(parse_json(tostring(Output_Json.billingReference)).billableDuration))[0].duration)\n| summarize Avg_BillableDuration = avg(BillableDuration), Max_BillableDuration = max(BillableDuration), Total_BillableDuration = sum(BillableDuration) by TriggerName, PipelineName, ActivityName, ActivityType\n| order by Avg_BillableDuration, Max_BillableDuration\n| limit 5\n",
+                                            "isOptional": true
+                                        },
+                                        {
+                                            "name": "ControlType",
+                                            "value": "FrameControlChart",
+                                            "isOptional": true
+                                        },
+                                        {
+                                            "name": "SpecificChart",
+                                            "value": "StackedBar",
+                                            "isOptional": true
+                                        },
+                                        {
+                                            "name": "PartTitle",
+                                            "value": "Analytics",
+                                            "isOptional": true
+                                        },
+                                        {
+                                            "name": "PartSubTitle",
+                                            "value": "pollybloganalytics",
+                                            "isOptional": true
+                                        },
+                                        {
+                                            "name": "Dimensions",
+                                            "value": {
+                                                "xAxis": {
+                                                    "name": "PipelineName",
+                                                    "type": "string"
+                                                },
+                                                "yAxis": [
+                                                    {
+                                                        "name": "Total_BillableDuration",
+                                                        "type": "decimal"
+                                                    }
+                                                ],
+                                                "splitBy": [
+                                                    {
+                                                        "name": "ActivityType",
+                                                        "type": "string"
+                                                    }
+                                                ],
+                                                "aggregation": "Sum"
+                                            },
+                                            "isOptional": true
+                                        },
+                                        {
+                                            "name": "LegendOptions",
+                                            "value": {
+                                                "isEnabled": true,
+                                                "position": "Bottom"
+                                            },
+                                            "isOptional": true
+                                        },
+                                        {
+                                            "name": "IsQueryContainTimeRange",
+                                            "value": false,
+                                            "isOptional": true
+                                        }
+                                    ],
+                                    "type": "Extension/Microsoft_OperationsManagementSuite_Workspace/PartType/LogsDashboardPart",
+                                    "settings": {
+                                        "content": {
+                                            "PartTitle": "Azure Data Factory - Billable Duration by  Pipeline",
+                                            "PartSubTitle": "Split on Activity"
+                                        }
+                                    }
+                                }
+                            },
+                            "6": {
+                                "position": {
+                                    "x": 50,
+                                    "y": 0,
+                                    "colSpan": 15,
+                                    "rowSpan": 5
+                                },
+                                "metadata": {
+                                    "inputs": [
+                                        {
+                                            "name": "resourceTypeMode",
+                                            "isOptional": true
+                                        },
+                                        {
+                                            "name": "ComponentId",
+                                            "isOptional": true
+                                        },
+                                        {
+                                            "name": "Scope",
+                                            "value": {
+                                                "resourceIds": [
+                                                    "/subscriptions/89bc2ebd-411c-4cd0-96c6-15d201e3a28b/resourcegroups/synapse/providers/microsoft.operationalinsights/workspaces/pollybloganalytics"
+                                                ]
+                                            },
+                                            "isOptional": true
+                                        },
+                                        {
+                                            "name": "PartId",
+                                            "value": "34ba3ba4-1dd4-4679-b8ee-76c9a15df260",
+                                            "isOptional": true
+                                        },
+                                        {
+                                            "name": "Version",
+                                            "value": "2.0",
+                                            "isOptional": true
+                                        },
+                                        {
+                                            "name": "TimeRange",
+                                            "value": "P7D",
+                                            "isOptional": true
+                                        },
+                                        {
+                                            "name": "DashboardId",
+                                            "isOptional": true
+                                        },
+                                        {
+                                            "name": "DraftRequestParameters",
+                                            "isOptional": true
+                                        },
+                                        {
+                                            "name": "Query",
+                                            "value": "ADFActivityRun\n//| where PipelineRunId == 'b03f23f9-ef6c-417a-91b1-20cbaa303702'\n| where Status == \"Succeeded\" or Status == \"Failed\"\n| extend unit = extractjson(\"$.billingReference.billableDuration[0].unit\", Output)\n| extend meterType = extractjson(\"$.billingReference.billableDuration[0].meterType\", Output)\n| extend BillingReference_ActivityType = extractjson(\"$.billingReference.activityType\", Output)\n| extend units_consumed = todecimal(extractjson(\"$.billingReference.billableDuration[0].duration\", Output))\n| extend Activity_Execution_Seconds = (End - Start) / time(1s)\n| project\n    UserProperties,\n    PipelineRunId,\n    PipelineName,\n    ActivityRunId,\n    ActivityName,\n    ActivityType,\n    ActivityIterationCount,\n    Status,\n    Start,\n    End,\n    Units_Consumed = units_consumed,\n    Unit = unit,\n    BillingReference_ActivityType,\n    Meter_Type = meterType,\n    Activity_Execution_Seconds \n| join kind = leftouter (\n    ADFPipelineRun    \n    | extend TriggerId = tostring(parse_json(Predecessors)[0].Id)\n    | where Status == \"Succeeded\" or Status == \"Failed\"\n    | join kind = leftouter (\n        ADFTriggerRun\n        | project TriggerId, TriggerName\n        )\n        on $left.TriggerId == $right.TriggerId\n    | project TriggerName, TriggerId, RunId, Annotations, Start, PipelineStatus = Status\n    )\n    on $left.PipelineRunId == $right.RunId\n| join kind=leftouter datatable (\n    IRtype: string,\n    activityType: string,\n    CostGrouping: string,\n    HourCost: decimal\n) [\n    \"MemoryOptimized\", \"executedataflow\", \"Dataflow\", 0.325,\n    \"General\", \"executedataflow\", \"Dataflow\", 0.258,\n    \"ComputeOptimized\", \"executedataflow\", \"Dataflow\", 0.193,\n    \"AzureIR\", \"DataMovement\", \"Data Movement\", 0.25,\n    \"AzureIR\", \"PipelineActivity\", \"Pipeline Activity\", 0.005,\n    \"AzureIR\", \"ExternalActivity\", \"External Activity\", 0.00025,\n    \"ManagedVNetIR\", \"DataMovement\", \"VNET Data Movement\", 0.25,\n    \"ManagedVNetIR\", \"PipelineActivity\", \"VNET Data Movement\", 1.00,\n    \"ManagedVNetIR\", \"ExternalActivity\", \"External Activity\", 1.00,\n    \"SelfhostedIR\", \"DataMovement\", \"SHIR Data Movement\", 0.10,\n    \"SelfhostedIR\", \"PipelineActivity\", \"SHIR Pipeline Activity\", 0.002,\n    \"SelfhostedIR\", \"ExternalActivity\", \"External Activity\", 0.0001\n]\n   on $left.Meter_Type == $right.IRtype and $left.BillingReference_ActivityType == $right.activityType\n//| where isempty(activityType) == false\n| extend estimatedCost = HourCost * Units_Consumed\n| project\n    TriggerId,\n    TriggerName,\n    PipelineName,\n   PipelineRunId,\n    ActivityRunId,\n    ActivityName,\n    ActivityType,\n    BillingReference_ActivityType,\n    PipelineStatus,\n    Annotations,\n    activityType,\n    Meter_Type,\n    Start,\n    Activity_Execution_Seconds, // = (End - Start) / time(1s)\n    Units_Consumed,  // =  billingReference.billableDuration[0].duration\n    HourCost,     // Depends on ADFActivityRun.Meter_Type and ADFActivityRun.Activity_Type\n    Estimated_Cost = todecimal(estimatedCost) // = HourCost * Execution_Seconds \n| summarize Activity_Count = count(), Aggrgated_Estimated_Cost = sum(Estimated_Cost) by TriggerId, PipelineName, PipelineRunId, Annotations\n| extend Activity_Runs_Cost = todecimal((Activity_Count * 0.001))  //Adjust for non AzureIR executions \n| extend Total_Estimated_Cost = todecimal((Activity_Runs_Cost + Aggrgated_Estimated_Cost))\n| project \n    Annotations,\n    TriggerId,\n    PipelineName,\n    PipelineRunId,\n    Total_Estimated_Cost\n\n",
+                                            "isOptional": true
+                                        },
+                                        {
+                                            "name": "ControlType",
+                                            "value": "AnalyticsGrid",
+                                            "isOptional": true
+                                        },
+                                        {
+                                            "name": "SpecificChart",
+                                            "isOptional": true
+                                        },
+                                        {
+                                            "name": "PartTitle",
+                                            "value": "Analytics",
+                                            "isOptional": true
+                                        },
+                                        {
+                                            "name": "PartSubTitle",
+                                            "value": "pollybloganalytics",
+                                            "isOptional": true
+                                        },
+                                        {
+                                            "name": "Dimensions",
+                                            "isOptional": true
+                                        },
+                                        {
+                                            "name": "LegendOptions",
+                                            "isOptional": true
+                                        },
+                                        {
+                                            "name": "IsQueryContainTimeRange",
+                                            "value": false,
+                                            "isOptional": true
+                                        }
+                                    ],
+                                    "type": "Extension/Microsoft_OperationsManagementSuite_Workspace/PartType/LogsDashboardPart",
+                                    "settings": {
+                                        "content": {
+                                            "GridColumnsWidth": {
+                                                "PipelineRunId": "302px",
+                                                "Total_Estimated_Cost": "234px",
+                                                "PipelineName": "210px"
+                                            },
+                                            "PartTitle": "Azure Data Factory",
+                                            "PartSubTitle": "Cost by Pipeline"
+                                        }
+                                    }
+                                }
+                            },
+                            "7": {
+                                "position": {
+                                    "x": 0,
+                                    "y": 2,
+                                    "colSpan": 6,
+                                    "rowSpan": 8
+                                },
+                                "metadata": {
+                                    "inputs": [
+                                        {
+                                            "name": "resourceTypeMode",
+                                            "isOptional": true
+                                        },
+                                        {
+                                            "name": "ComponentId",
+                                            "isOptional": true
+                                        },
+                                        {
+                                            "name": "Scope",
+                                            "value": {
+                                                "resourceIds": [
+                                                    "/subscriptions/89bc2ebd-411c-4cd0-96c6-15d201e3a28b/resourcegroups/synapse/providers/microsoft.operationalinsights/workspaces/pollybloganalytics"
+                                                ]
+                                            },
+                                            "isOptional": true
+                                        },
+                                        {
+                                            "name": "PartId",
+                                            "value": "86e85b6f-6da0-4866-b149-1333f5148773",
+                                            "isOptional": true
+                                        },
+                                        {
+                                            "name": "Version",
+                                            "value": "2.0",
+                                            "isOptional": true
+                                        },
+                                        {
+                                            "name": "TimeRange",
+                                            "value": "P1D",
+                                            "isOptional": true
+                                        },
+                                        {
+                                            "name": "DashboardId",
+                                            "isOptional": true
+                                        },
+                                        {
+                                            "name": "DraftRequestParameters",
+                                            "isOptional": true
+                                        },
+                                        {
+                                            "name": "Query",
+                                            "value": "StorageBlobLogs\n| where OperationName == \"AppendFile\" \n| extend ContainerName = split(parse_url(Uri).Path, \"/\")[1]\n| extend Service = case(RequesterObjectId == '52eb6248-21c0-454d-9550-2dcb66f9d557', 'Data Factory', RequesterObjectId == '266d7a10-2651-47f0-a7be-7dbf6ce867b9', 'synapse', 'Unknown')\n| summarize WriteSize = sum(RequestBodySize), WriteCount = count() by tostring(ContainerName), Service\n",
+                                            "isOptional": true
+                                        },
+                                        {
+                                            "name": "ControlType",
+                                            "value": "FrameControlChart",
+                                            "isOptional": true
+                                        },
+                                        {
+                                            "name": "SpecificChart",
+                                            "value": "StackedColumn",
+                                            "isOptional": true
+                                        },
+                                        {
+                                            "name": "PartTitle",
+                                            "value": "Analytics",
+                                            "isOptional": true
+                                        },
+                                        {
+                                            "name": "PartSubTitle",
+                                            "value": "pollybloganalytics",
+                                            "isOptional": true
+                                        },
+                                        {
+                                            "name": "Dimensions",
+                                            "value": {
+                                                "xAxis": {
+                                                    "name": "ContainerName",
+                                                    "type": "string"
+                                                },
+                                                "yAxis": [
+                                                    {
+                                                        "name": "WriteSize",
+                                                        "type": "long"
+                                                    }
+                                                ],
+                                                "splitBy": [
+                                                    {
+                                                        "name": "Service",
+                                                        "type": "string"
+                                                    }
+                                                ],
+                                                "aggregation": "Sum"
+                                            },
+                                            "isOptional": true
+                                        },
+                                        {
+                                            "name": "LegendOptions",
+                                            "value": {
+                                                "isEnabled": true,
+                                                "position": "Bottom"
+                                            },
+                                            "isOptional": true
+                                        },
+                                        {
+                                            "name": "IsQueryContainTimeRange",
+                                            "value": false,
+                                            "isOptional": true
+                                        }
+                                    ],
+                                    "type": "Extension/Microsoft_OperationsManagementSuite_Workspace/PartType/LogsDashboardPart",
+                                    "settings": {
+                                        "content": {
+                                            "Query": "StorageBlobLogs\n| where OperationName == \"AppendFile\" \n| extend ContainerName = split(parse_url(Uri).Path, \"/\")[1]\n| extend Service = case(RequesterObjectId == '52eb6248-21c0-454d-9550-2dcb66f9d557', 'Data Factory', RequesterObjectId == '266d7a10-2651-47f0-a7be-7dbf6ce867b9', 'synapse', 'Unknown')\n| summarize WriteSize = sum(RequestBodySize), WriteCount = count() by tostring(ContainerName), Service\n\n"
+                                        }
+                                    },
+                                    "partHeader": {
+                                        "title": "Storage Account",
+                                        "subtitle": "File Write Operations by Service"
+                                    }
+                                }
+                            },
+                            "8": {
+                                "position": {
+                                    "x": 6,
+                                    "y": 5,
+                                    "colSpan": 11,
+                                    "rowSpan": 5
+                                },
+                                "metadata": {
+                                    "inputs": [
+                                        {
+                                            "name": "resourceTypeMode",
+                                            "isOptional": true
+                                        },
+                                        {
+                                            "name": "ComponentId",
+                                            "isOptional": true
+                                        },
+                                        {
+                                            "name": "Scope",
+                                            "value": {
+                                                "resourceIds": [
+                                                    "/subscriptions/89bc2ebd-411c-4cd0-96c6-15d201e3a28b/resourcegroups/synapse/providers/microsoft.operationalinsights/workspaces/pollybloganalytics"
+                                                ]
+                                            },
+                                            "isOptional": true
+                                        },
+                                        {
+                                            "name": "PartId",
+                                            "value": "159cdc35-94df-4205-ab7c-86fc33134daa",
+                                            "isOptional": true
+                                        },
+                                        {
+                                            "name": "Version",
+                                            "value": "2.0",
+                                            "isOptional": true
+                                        },
+                                        {
+                                            "name": "TimeRange",
+                                            "value": "P1D",
+                                            "isOptional": true
+                                        },
+                                        {
+                                            "name": "DashboardId",
+                                            "isOptional": true
+                                        },
+                                        {
+                                            "name": "DraftRequestParameters",
+                                            "isOptional": true
+                                        },
+                                        {
+                                            "name": "Query",
+                                            "value": "ADFActivityRun\n| where ActivityType == 'synapseNotebook' \n| where Status == 'Succeeded'\n| extend runPageUrl_ = tostring(parse_json(Output).runPageUrl)\n| extend runPageUrl_array = split(runPageUrl_, '/')\n| extend run_index = array_index_of(runPageUrl_array, \"run\") //run is easy to capture, we can do +-1 to get jobId and runid\n| extend jobId_ = runPageUrl_array[(toint(run_index)-1)]\n| extend runId_ = runPageUrl_array[(toint(run_index)+1)]\n| extend notebookPath_ = tostring(parse_json(Input).notebookPath)\n| extend resources_ = split(_ResourceId,'/')\n| extend subscriptionID_ = resources_[2]\n| extend resourceGroup_ = resources_[4]\n| extend workspace_ = resources_[8]\n| extend executionDuration_ = tostring(parse_json(Output).executionDuration)\n| extend duration_ = tostring(parse_json(tostring(parse_json(tostring(parse_json(Output).billingReference)).billableDuration))[0].duration)\n| extend runPageUrl_ = tostring(parse_json(Output).runPageUrl)\n| extend notebook_array = split(notebookPath_, '/')\n| extend notebook_index = array_length(notebook_array)\n| extend notebook = notebook_array[toint(notebook_index)-1]\n| project TimeGenerated, subscriptionID_ , resourceGroup_, PipelineName ,PipelineRunId,ActivityType, Start, End, ADF_ExecutionTime_s = datetime_diff('second', End, Start ),  workspace_, notebook, executionDuration_, duration_, runPageUrl_,  jobId = tostring(jobId_), runId_\n| join kind=leftouter ( \n                        synapseJobs //| where tostring(parse_json(RequestParams).jobId) == '26896'\n                        | where ActionName == 'runSucceeded'\n                        | extend jobId_ = tostring(parse_json(RequestParams).jobId)\n                        | extend idInJob_ = tostring(parse_json(RequestParams).idInJob)\n                        | extend clusterId_ = tostring(parse_json(RequestParams).clusterId)\n                        | extend jobClusterType_ = tostring(parse_json(RequestParams).jobClusterType)\n                        | extend jobTaskType_ = tostring(parse_json(RequestParams).jobTaskType)\n                        | extend resources_ = split(_ResourceId,'/')\n                        | extend subscriptionID_ = resources_[2]\n                        | extend resourceGroup_ = resources_[4]\n                        | extend workspace_ = resources_[8]\n                        | join  kind = leftouter ( \n                                synapseJobs\n                                | where ActionName == 'runStart'\n                                | extend jobId_ = tostring(parse_json(RequestParams).jobId)\n                                | extend clusterId_ = tostring(parse_json(RequestParams).clusterId)\n                                | project startTime = TimeGenerated, jobId_, clusterId_ \n                        ) on $left.jobId_ == $right.jobId_\n                        | project subscriptionID_,resourceGroup_, workspace_, clusterId_, jobId = tostring(jobId_),idInJob_, startTime, endTime = TimeGenerated, DBX_ExecutionTime_s = datetime_diff('second', TimeGenerated, startTime )\n        ) on $left.jobId == $right.jobId \n| project Start, subscriptionID_,resourceGroup_, workspace_, notebook, clusterId_, tolong(DBX_ExecutionTime_s), tolong(executionDuration_)\n",
+                                            "isOptional": true
+                                        },
+                                        {
+                                            "name": "ControlType",
+                                            "value": "FrameControlChart",
+                                            "isOptional": true
+                                        },
+                                        {
+                                            "name": "SpecificChart",
+                                            "value": "Line",
+                                            "isOptional": true
+                                        },
+                                        {
+                                            "name": "PartTitle",
+                                            "value": "Analytics",
+                                            "isOptional": true
+                                        },
+                                        {
+                                            "name": "PartSubTitle",
+                                            "value": "pollybloganalytics",
+                                            "isOptional": true
+                                        },
+                                        {
+                                            "name": "Dimensions",
+                                            "value": {
+                                                "xAxis": {
+                                                    "name": "Start",
+                                                    "type": "datetime"
+                                                },
+                                                "yAxis": [
+                                                    {
+                                                        "name": "DBX_ExecutionTime_s",
+                                                        "type": "long"
+                                                    }
+                                                ],
+                                                "splitBy": [
+                                                    {
+                                                        "name": "clusterId_",
+                                                        "type": "string"
+                                                    }
+                                                ],
+                                                "aggregation": "Sum"
+                                            },
+                                            "isOptional": true
+                                        },
+                                        {
+                                            "name": "LegendOptions",
+                                            "value": {
+                                                "isEnabled": true,
+                                                "position": "Bottom"
+                                            },
+                                            "isOptional": true
+                                        },
+                                        {
+                                            "name": "IsQueryContainTimeRange",
+                                            "value": false,
+                                            "isOptional": true
+                                        }
+                                    ],
+                                    "type": "Extension/Microsoft_OperationsManagementSuite_Workspace/PartType/LogsDashboardPart",
+                                    "settings": {
+                                        "content": {
+                                            "PartTitle": "Azure synapse",
+                                            "PartSubTitle": "Execution Time In Seconds By ClusterID"
+                                        }
+                                    }
+                                }
+                            },
+                            "9": {
+                                "position": {
+                                    "x": 17,
+                                    "y": 5,
+                                    "colSpan": 21,
+                                    "rowSpan": 5
+                                },
+                                "metadata": {
+                                    "inputs": [
+                                        {
+                                            "name": "resourceTypeMode",
+                                            "isOptional": true
+                                        },
+                                        {
+                                            "name": "ComponentId",
+                                            "isOptional": true
+                                        },
+                                        {
+                                            "name": "Scope",
+                                            "value": {
+                                                "resourceIds": [
+                                                    "/subscriptions/89bc2ebd-411c-4cd0-96c6-15d201e3a28b/resourcegroups/synapse/providers/microsoft.operationalinsights/workspaces/pollybloganalytics"
+                                                ]
+                                            },
+                                            "isOptional": true
+                                        },
+                                        {
+                                            "name": "PartId",
+                                            "value": "4fd831ef-9f9b-4b24-b3d7-cc7551283c3b",
+                                            "isOptional": true
+                                        },
+                                        {
+                                            "name": "Version",
+                                            "value": "2.0",
+                                            "isOptional": true
+                                        },
+                                        {
+                                            "name": "TimeRange",
+                                            "value": "2022-01-01T07:16:59.000Z/2022-02-03T07:16:59.719Z",
+                                            "isOptional": true
+                                        },
+                                        {
+                                            "name": "DashboardId",
+                                            "isOptional": true
+                                        },
+                                        {
+                                            "name": "DraftRequestParameters",
+                                            "isOptional": true
+                                        },
+                                        {
+                                            "name": "Query",
+                                            "value": "// End to End Performance\n// Notebook = TelemetryGenerator\nsynapseJobs \n//| distinct ActionName\n//| where tostring(parse_json(RequestParams).jobId) == '26896'\n| where ActionName == 'runFailed'\n| extend jobId_ = tostring(parse_json(RequestParams).jobId)\n| extend idInJob_ = tostring(parse_json(RequestParams).idInJob)\n| extend clusterId_ = tostring(parse_json(RequestParams).clusterId)\n| extend jobClusterType_ = tostring(parse_json(RequestParams).jobClusterType)\n| extend jobTaskType_ = tostring(parse_json(RequestParams).jobTaskType)\n| extend resources_ = split(_ResourceId,'/')\n| extend subscriptionID_ = resources_[2]\n| extend resourceGroup_ = resources_[4]\n| extend workspace_ = resources_[8]\n| extend statusCode_ = tostring(parse_json(Response).statusCode)\n| extend errorMessage_ = tostring(parse_json(Response).errorMessage)\n| join  kind = leftouter ( \n        synapseJobs\n        | where ActionName == 'runStart'\n        | extend jobId_ = tostring(parse_json(RequestParams).jobId)\n        | extend clusterId_ = tostring(parse_json(RequestParams).clusterId)\n        | project startTime = TimeGenerated, jobId_, clusterId_ \n) on $left.jobId_ == $right.jobId_\n| project subscriptionID_,resourceGroup_, workspace_, clusterId_, jobId_,idInJob_, startTime, endTime = TimeGenerated, ExecutionTime_s = datetime_diff('second', TimeGenerated, startTime ), statusCode_, errorMessage_\n\n",
+                                            "isOptional": true
+                                        },
+                                        {
+                                            "name": "ControlType",
+                                            "value": "AnalyticsGrid",
+                                            "isOptional": true
+                                        },
+                                        {
+                                            "name": "SpecificChart",
+                                            "isOptional": true
+                                        },
+                                        {
+                                            "name": "PartTitle",
+                                            "value": "Analytics",
+                                            "isOptional": true
+                                        },
+                                        {
+                                            "name": "PartSubTitle",
+                                            "value": "pollybloganalytics",
+                                            "isOptional": true
+                                        },
+                                        {
+                                            "name": "Dimensions",
+                                            "isOptional": true
+                                        },
+                                        {
+                                            "name": "LegendOptions",
+                                            "isOptional": true
+                                        },
+                                        {
+                                            "name": "IsQueryContainTimeRange",
+                                            "value": false,
+                                            "isOptional": true
+                                        }
+                                    ],
+                                    "type": "Extension/Microsoft_OperationsManagementSuite_Workspace/PartType/LogsDashboardPart",
+                                    "settings": {
+                                        "content": {
+                                            "PartTitle": "Azure synapse",
+                                            "PartSubTitle": "Recent Error Details"
+                                        }
+                                    }
+                                }
+                            },
+                            "10": {
+                                "position": {
+                                    "x": 38,
+                                    "y": 5,
+                                    "colSpan": 6,
+                                    "rowSpan": 5
+                                },
+                                "metadata": {
+                                    "inputs": [
+                                        {
+                                            "name": "resourceTypeMode",
+                                            "isOptional": true
+                                        },
+                                        {
+                                            "name": "ComponentId",
+                                            "isOptional": true
+                                        },
+                                        {
+                                            "name": "Scope",
+                                            "value": {
+                                                "resourceIds": [
+                                                    "/subscriptions/89bc2ebd-411c-4cd0-96c6-15d201e3a28b/resourcegroups/synapse/providers/microsoft.operationalinsights/workspaces/pollybloganalytics"
+                                                ]
+                                            },
+                                            "isOptional": true
+                                        },
+                                        {
+                                            "name": "PartId",
+                                            "value": "06b30204-335c-46c3-910f-ece3100e1ee5",
+                                            "isOptional": true
+                                        },
+                                        {
+                                            "name": "Version",
+                                            "value": "2.0",
+                                            "isOptional": true
+                                        },
+                                        {
+                                            "name": "TimeRange",
+                                            "value": "P1D",
+                                            "isOptional": true
+                                        },
+                                        {
+                                            "name": "DashboardId",
+                                            "isOptional": true
+                                        },
+                                        {
+                                            "name": "DraftRequestParameters",
+                                            "isOptional": true
+                                        },
+                                        {
+                                            "name": "Query",
+                                            "value": "ADFActivityRun\n| where ActivityType == 'synapseNotebook' \n| where Status == 'Succeeded'\n| extend runPageUrl_ = tostring(parse_json(Output).runPageUrl)\n| extend runPageUrl_array = split(runPageUrl_, '/')\n| extend run_index = array_index_of(runPageUrl_array, \"run\") //run is easy to capture, we can do +-1 to get jobId and runid\n| extend jobId_ = runPageUrl_array[(toint(run_index)-1)]\n| extend runId_ = runPageUrl_array[(toint(run_index)+1)]\n| extend notebookPath_ = tostring(parse_json(Input).notebookPath)\n| extend resources_ = split(_ResourceId,'/')\n| extend subscriptionID_ = resources_[2]\n| extend resourceGroup_ = resources_[4]\n| extend workspace_ = resources_[8]\n| extend executionDuration_ = tostring(parse_json(Output).executionDuration)\n| extend duration_ = tostring(parse_json(tostring(parse_json(tostring(parse_json(Output).billingReference)).billableDuration))[0].duration)\n| extend runPageUrl_ = tostring(parse_json(Output).runPageUrl)\n| extend notebook_array = split(notebookPath_, '/')\n| extend notebook_index = array_length(notebook_array)\n| extend notebook = notebook_array[toint(notebook_index)-1]\n| project TimeGenerated, subscriptionID_ , resourceGroup_, PipelineName ,PipelineRunId,ActivityType, Start, End, ADF_ExecutionTime_s = datetime_diff('second', End, Start ),  workspace_, notebook, executionDuration_, duration_, runPageUrl_,  jobId = tostring(jobId_), runId_\n| join kind=leftouter ( \n                        synapseJobs //| where tostring(parse_json(RequestParams).jobId) == '26896'\n                        | where ActionName in ('runFailed', 'runSucceeded')\n                        | extend jobId_ = tostring(parse_json(RequestParams).jobId)\n                        | extend idInJob_ = tostring(parse_json(RequestParams).idInJob)\n                        | extend clusterId_ = tostring(parse_json(RequestParams).clusterId)\n                        | extend jobClusterType_ = tostring(parse_json(RequestParams).jobClusterType)\n                        | extend jobTaskType_ = tostring(parse_json(RequestParams).jobTaskType)\n                        | extend statusCode_ = tostring(parse_json(Response).statusCode)\n                        | extend errorMessage_ = tostring(parse_json(Response).errorMessage)\n                        | extend resources_ = split(_ResourceId,'/')\n                        | extend subscriptionID_ = resources_[2]\n                        | extend resourceGroup_ = resources_[4]\n                        | extend workspace_ = resources_[8]\n                        | join  kind = leftouter ( \n                                synapseJobs\n                                | where ActionName == 'runStart'\n                                | extend jobId_ = tostring(parse_json(RequestParams).jobId)\n                                | extend clusterId_ = tostring(parse_json(RequestParams).clusterId)\n                                | project startTime = TimeGenerated, jobId_, clusterId_ \n                        ) on $left.jobId_ == $right.jobId_\n                        | project subscriptionID_,resourceGroup_, workspace_, clusterId_, jobId = tostring(jobId_),idInJob_, startTime, endTime = TimeGenerated, DBX_ExecutionTime_s = datetime_diff('second', TimeGenerated, startTime ), statusCode_, errorMessage_, ActionName\n        ) on $left.jobId == $right.jobId \n| project Start, subscriptionID_,resourceGroup_, workspace_, tostring(notebook), clusterId_, tolong(DBX_ExecutionTime_s), tolong(executionDuration_), ActionName, count = 1\n",
+                                            "isOptional": true
+                                        },
+                                        {
+                                            "name": "ControlType",
+                                            "value": "FrameControlChart",
+                                            "isOptional": true
+                                        },
+                                        {
+                                            "name": "SpecificChart",
+                                            "value": "StackedColumn",
+                                            "isOptional": true
+                                        },
+                                        {
+                                            "name": "PartTitle",
+                                            "value": "Analytics",
+                                            "isOptional": true
+                                        },
+                                        {
+                                            "name": "PartSubTitle",
+                                            "value": "pollybloganalytics",
+                                            "isOptional": true
+                                        },
+                                        {
+                                            "name": "Dimensions",
+                                            "value": {
+                                                "xAxis": {
+                                                    "name": "ActionName",
+                                                    "type": "string"
+                                                },
+                                                "yAxis": [
+                                                    {
+                                                        "name": "count",
+                                                        "type": "long"
+                                                    }
+                                                ],
+                                                "splitBy": [
+                                                    {
+                                                        "name": "notebook",
+                                                        "type": "string"
+                                                    }
+                                                ],
+                                                "aggregation": "Sum"
+                                            },
+                                            "isOptional": true
+                                        },
+                                        {
+                                            "name": "LegendOptions",
+                                            "value": {
+                                                "isEnabled": true,
+                                                "position": "Bottom"
+                                            },
+                                            "isOptional": true
+                                        },
+                                        {
+                                            "name": "IsQueryContainTimeRange",
+                                            "value": false,
+                                            "isOptional": true
+                                        }
+                                    ],
+                                    "type": "Extension/Microsoft_OperationsManagementSuite_Workspace/PartType/LogsDashboardPart",
+                                    "settings": {
+                                        "content": {
+                                            "PartTitle": "Azure synapse",
+                                            "PartSubTitle": "Success vs Failure By Notebook"
+                                        }
+                                    }
+                                }
+                            },
+                            "11": {
+                                "position": {
+                                    "x": 44,
+                                    "y": 5,
+                                    "colSpan": 6,
+                                    "rowSpan": 5
+                                },
+                                "metadata": {
+                                    "inputs": [
+                                        {
+                                            "name": "resourceTypeMode",
+                                            "isOptional": true
+                                        },
+                                        {
+                                            "name": "ComponentId",
+                                            "isOptional": true
+                                        },
+                                        {
+                                            "name": "Scope",
+                                            "value": {
+                                                "resourceIds": [
+                                                    "/subscriptions/89bc2ebd-411c-4cd0-96c6-15d201e3a28b/resourcegroups/synapse/providers/microsoft.operationalinsights/workspaces/pollybloganalytics"
+                                                ]
+                                            },
+                                            "isOptional": true
+                                        },
+                                        {
+                                            "name": "PartId",
+                                            "value": "28f9dfda-6b3f-4666-a2fd-60d2324934c5",
+                                            "isOptional": true
+                                        },
+                                        {
+                                            "name": "Version",
+                                            "value": "2.0",
+                                            "isOptional": true
+                                        },
+                                        {
+                                            "name": "TimeRange",
+                                            "value": "P7D",
+                                            "isOptional": true
+                                        },
+                                        {
+                                            "name": "DashboardId",
+                                            "isOptional": true
+                                        },
+                                        {
+                                            "name": "DraftRequestParameters",
+                                            "isOptional": true
+                                        },
+                                        {
+                                            "name": "Query",
+                                            "value": "synapseClusters \n| where ActionName == 'delete'\n| extend e_Resource = tostring(array_reverse(split(tolower(_ResourceId), '/'))[0])\n| extend e_ClusterId = tostring(parse_json(RequestParams).cluster_id)\n| extend e_TerminationReason = tostring(parse_json(tostring(parse_json(RequestParams).termination_reason)).code)\n| where e_TerminationReason == 'INACTIVITY'\n| extend e_Inactivity = toint(parse_json(tostring(parse_json(tostring(parse_json(RequestParams).termination_reason)).parameters)).inactivity_duration_min)\n| summarize Total_Inactive_Minutes = sum(e_Inactivity), Occurances = count() by e_Resource, e_ClusterId\n| project e_Resource, e_ClusterId, Occurances, Total_Inactive_Minutes, MinutesPerOccurace = (Total_Inactive_Minutes/Occurances)\n",
+                                            "isOptional": true
+                                        },
+                                        {
+                                            "name": "ControlType",
+                                            "value": "FrameControlChart",
+                                            "isOptional": true
+                                        },
+                                        {
+                                            "name": "SpecificChart",
+                                            "value": "StackedColumn",
+                                            "isOptional": true
+                                        },
+                                        {
+                                            "name": "PartTitle",
+                                            "value": "Analytics",
+                                            "isOptional": true
+                                        },
+                                        {
+                                            "name": "PartSubTitle",
+                                            "value": "pollybloganalytics",
+                                            "isOptional": true
+                                        },
+                                        {
+                                            "name": "Dimensions",
+                                            "value": {
+                                                "xAxis": {
+                                                    "name": "e_Resource",
+                                                    "type": "string"
+                                                },
+                                                "yAxis": [
+                                                    {
+                                                        "name": "Occurances",
+                                                        "type": "long"
+                                                    }
+                                                ],
+                                                "splitBy": [
+                                                    {
+                                                        "name": "e_ClusterId",
+                                                        "type": "string"
+                                                    }
+                                                ],
+                                                "aggregation": "Sum"
+                                            },
+                                            "isOptional": true
+                                        },
+                                        {
+                                            "name": "LegendOptions",
+                                            "value": {
+                                                "isEnabled": true,
+                                                "position": "Bottom"
+                                            },
+                                            "isOptional": true
+                                        },
+                                        {
+                                            "name": "IsQueryContainTimeRange",
+                                            "value": false,
+                                            "isOptional": true
+                                        }
+                                    ],
+                                    "type": "Extension/Microsoft_OperationsManagementSuite_Workspace/PartType/LogsDashboardPart",
+                                    "settings": {
+                                        "content": {
+                                            "Query": "synapseClusters \n| where ActionName == 'delete'\n| extend e_Resource = tostring(array_reverse(split(tolower(_ResourceId), '/'))[0])\n| extend e_ClusterId = tostring(parse_json(RequestParams).cluster_id)\n| extend e_TerminationReason = tostring(parse_json(tostring(parse_json(RequestParams).termination_reason)).code)\n| where e_TerminationReason == 'INACTIVITY'\n| extend e_Inactivity = toint(parse_json(tostring(parse_json(tostring(parse_json(RequestParams).termination_reason)).parameters)).inactivity_duration_min)\n| summarize Total_Inactive_Minutes = sum(e_Inactivity), Occurances = count() by e_Resource, e_ClusterId, Time = bin(TimeGenerated, 1d)\n| project e_Resource, e_ClusterId, Occurances, Total_Inactive_Minutes, MinutesPerOccurace = (Total_Inactive_Minutes/Occurances), Time\n\n",
+                                            "PartTitle": "Azure synapse",
+                                            "PartSubTitle": "Daily Cluster Inactivity",
+                                            "Dimensions": {
+                                                "xAxis": {
+                                                    "name": "Time",
+                                                    "type": "datetime"
+                                                },
+                                                "yAxis": [
+                                                    {
+                                                        "name": "Total_Inactive_Minutes",
+                                                        "type": "long"
+                                                    }
+                                                ],
+                                                "splitBy": [
+                                                    {
+                                                        "name": "e_ClusterId",
+                                                        "type": "string"
+                                                    }
+                                                ],
+                                                "aggregation": "Sum"
+                                            }
+                                        }
+                                    }
+                                }
+                            },
+                            "12": {
+                                "position": {
+                                    "x": 0,
+                                    "y": 10,
+                                    "colSpan": 6,
+                                    "rowSpan": 5
+                                },
+                                "metadata": {
+                                    "inputs": [
+                                        {
+                                            "name": "resourceTypeMode",
+                                            "isOptional": true
+                                        },
+                                        {
+                                            "name": "ComponentId",
+                                            "isOptional": true
+                                        },
+                                        {
+                                            "name": "Scope",
+                                            "value": {
+                                                "resourceIds": [
+                                                    "/subscriptions/89bc2ebd-411c-4cd0-96c6-15d201e3a28b/resourcegroups/synapse/providers/microsoft.operationalinsights/workspaces/pollybloganalytics"
+                                                ]
+                                            },
+                                            "isOptional": true
+                                        },
+                                        {
+                                            "name": "PartId",
+                                            "value": "0f062b20-1143-4e1b-97b0-25a8e5debbe3",
+                                            "isOptional": true
+                                        },
+                                        {
+                                            "name": "Version",
+                                            "value": "2.0",
+                                            "isOptional": true
+                                        },
+                                        {
+                                            "name": "TimeRange",
+                                            "value": "P7D",
+                                            "isOptional": true
+                                        },
+                                        {
+                                            "name": "DashboardId",
+                                            "isOptional": true
+                                        },
+                                        {
+                                            "name": "DraftRequestParameters",
+                                            "isOptional": true
+                                        },
+                                        {
+                                            "name": "Query",
+                                            "value": "StorageBlobLogs\n| where OperationName == \"AppendFile\" \n| extend ContainerName = split(parse_url(Uri).Path, \"/\")[1]\n| extend Service = case(RequesterObjectId == '52eb6248-21c0-454d-9550-2dcb66f9d557', 'Data Factory', RequesterObjectId == '266d7a10-2651-47f0-a7be-7dbf6ce867b9', 'synapse', 'Unknown')\n| summarize WriteSize = sum(RequestBodySize), WriteCount = count() by bin(TimeGenerated, 1d), Service, tostring(ContainerName)\n",
+                                            "isOptional": true
+                                        },
+                                        {
+                                            "name": "ControlType",
+                                            "value": "FrameControlChart",
+                                            "isOptional": true
+                                        },
+                                        {
+                                            "name": "SpecificChart",
+                                            "value": "StackedArea",
+                                            "isOptional": true
+                                        },
+                                        {
+                                            "name": "PartTitle",
+                                            "value": "Analytics",
+                                            "isOptional": true
+                                        },
+                                        {
+                                            "name": "PartSubTitle",
+                                            "value": "pollybloganalytics",
+                                            "isOptional": true
+                                        },
+                                        {
+                                            "name": "Dimensions",
+                                            "value": {
+                                                "xAxis": {
+                                                    "name": "TimeGenerated",
+                                                    "type": "datetime"
+                                                },
+                                                "yAxis": [
+                                                    {
+                                                        "name": "WriteSize",
+                                                        "type": "long"
+                                                    }
+                                                ],
+                                                "splitBy": [
+                                                    {
+                                                        "name": "Service",
+                                                        "type": "string"
+                                                    }
+                                                ],
+                                                "aggregation": "Sum"
+                                            },
+                                            "isOptional": true
+                                        },
+                                        {
+                                            "name": "LegendOptions",
+                                            "value": {
+                                                "isEnabled": true,
+                                                "position": "Bottom"
+                                            },
+                                            "isOptional": true
+                                        },
+                                        {
+                                            "name": "IsQueryContainTimeRange",
+                                            "value": false,
+                                            "isOptional": true
+                                        }
+                                    ],
+                                    "type": "Extension/Microsoft_OperationsManagementSuite_Workspace/PartType/LogsDashboardPart",
+                                    "settings": {
+                                        "content": {
+                                            "Query": "StorageBlobLogs\n| where OperationName == \"AppendFile\" \n| extend ContainerName = split(parse_url(Uri).Path, \"/\")[1]\n| extend Service = case(RequesterObjectId == '52eb6248-21c0-454d-9550-2dcb66f9d557', 'Data Factory', RequesterObjectId == '266d7a10-2651-47f0-a7be-7dbf6ce867b9', 'synapse', 'Unknown')\n| summarize WriteSize = sum(RequestBodySize), WriteCount = count() by bin(TimeGenerated, 1h), Service, tostring(ContainerName)\n\n",
+                                            "PartTitle": "Storage Account - Data Writes per Hour",
+                                            "PartSubTitle": "What is the distribution of writing data throughout the day?"
+                                        }
+                                    }
+                                }
+                            },
+                            "13": {
+                                "position": {
+                                    "x": 6,
+                                    "y": 10,
+                                    "colSpan": 11,
+                                    "rowSpan": 5
+                                },
+                                "metadata": {
+                                    "inputs": [
+                                        {
+                                            "name": "resourceTypeMode",
+                                            "isOptional": true
+                                        },
+                                        {
+                                            "name": "ComponentId",
+                                            "isOptional": true
+                                        },
+                                        {
+                                            "name": "Scope",
+                                            "value": {
+                                                "resourceIds": [
+                                                    "/subscriptions/89bc2ebd-411c-4cd0-96c6-15d201e3a28b/resourcegroups/synapse/providers/microsoft.operationalinsights/workspaces/pollybloganalytics"
+                                                ]
+                                            },
+                                            "isOptional": true
+                                        },
+                                        {
+                                            "name": "PartId",
+                                            "value": "1113e3a1-9d7c-4b6c-9e28-2acec2592880",
+                                            "isOptional": true
+                                        },
+                                        {
+                                            "name": "Version",
+                                            "value": "2.0",
+                                            "isOptional": true
+                                        },
+                                        {
+                                            "name": "TimeRange",
+                                            "value": "P1D",
+                                            "isOptional": true
+                                        },
+                                        {
+                                            "name": "DashboardId",
+                                            "isOptional": true
+                                        },
+                                        {
+                                            "name": "DraftRequestParameters",
+                                            "isOptional": true
+                                        },
+                                        {
+                                            "name": "Query",
+                                            "value": "StorageBlobLogs\n//| where  RequesterObjectId == '52eb6248-21c0-454d-9550-2dcb66f9d557' // Azure Data Factory MSI\n//| where  RequesterObjectId == '266d7a10-2651-47f0-a7be-7dbf6ce867b9' // Azure synapse SPN\n//| order by CorrelationId, TimeGenerated desc\n| extend NetworkLatency = DurationMs - ServerLatencyMs // network latency (the time to read the incoming request and send the response to the requester)\n| extend Service = case(RequesterObjectId == '52eb6248-21c0-454d-9550-2dcb66f9d557', 'Data Factory', RequesterObjectId == '266d7a10-2651-47f0-a7be-7dbf6ce867b9', 'synapse', 'Unknown')\n| summarize avg(DurationMs), avg(ServerLatencyMs), avg(NetworkLatency) by Service, OperationName, bin(TimeGenerated, 1h)\n\n",
+                                            "isOptional": true
+                                        },
+                                        {
+                                            "name": "ControlType",
+                                            "value": "FrameControlChart",
+                                            "isOptional": true
+                                        },
+                                        {
+                                            "name": "SpecificChart",
+                                            "value": "Line",
+                                            "isOptional": true
+                                        },
+                                        {
+                                            "name": "PartTitle",
+                                            "value": "Analytics",
+                                            "isOptional": true
+                                        },
+                                        {
+                                            "name": "PartSubTitle",
+                                            "value": "pollybloganalytics",
+                                            "isOptional": true
+                                        },
+                                        {
+                                            "name": "Dimensions",
+                                            "value": {
+                                                "xAxis": {
+                                                    "name": "TimeGenerated",
+                                                    "type": "datetime"
+                                                },
+                                                "yAxis": [
+                                                    {
+                                                        "name": "avg_NetworkLatency",
+                                                        "type": "real"
+                                                    }
+                                                ],
+                                                "splitBy": [
+                                                    {
+                                                        "name": "Service",
+                                                        "type": "string"
+                                                    }
+                                                ],
+                                                "aggregation": "Average"
+                                            },
+                                            "isOptional": true
+                                        },
+                                        {
+                                            "name": "LegendOptions",
+                                            "value": {
+                                                "isEnabled": true,
+                                                "position": "Bottom"
+                                            },
+                                            "isOptional": true
+                                        },
+                                        {
+                                            "name": "IsQueryContainTimeRange",
+                                            "value": false,
+                                            "isOptional": true
+                                        }
+                                    ],
+                                    "type": "Extension/Microsoft_OperationsManagementSuite_Workspace/PartType/LogsDashboardPart",
+                                    "settings": {
+                                        "content": {
+                                            "PartTitle": "Storage Account - Average Network Latency ",
+                                            "PartSubTitle": "Is there an increase in network latency?",
+                                            "LegendOptions": {
+                                                "isEnabled": true,
+                                                "position": "Bottom"
+                                            }
+                                        }
+                                    },
+                                    "partHeader": {
+                                        "title": "Storage Account",
+                                        "subtitle": "Latency By Connected Service"
+                                    }
+                                }
+                            },
+                            "14": {
+                                "position": {
+                                    "x": 17,
+                                    "y": 10,
+                                    "colSpan": 21,
+                                    "rowSpan": 5
+                                },
+                                "metadata": {
+                                    "inputs": [
+                                        {
+                                            "name": "resourceTypeMode",
+                                            "isOptional": true
+                                        },
+                                        {
+                                            "name": "ComponentId",
+                                            "isOptional": true
+                                        },
+                                        {
+                                            "name": "Scope",
+                                            "value": {
+                                                "resourceIds": [
+                                                    "/subscriptions/89bc2ebd-411c-4cd0-96c6-15d201e3a28b/resourcegroups/synapse/providers/microsoft.operationalinsights/workspaces/pollybloganalytics"
+                                                ]
+                                            },
+                                            "isOptional": true
+                                        },
+                                        {
+                                            "name": "PartId",
+                                            "value": "112ded54-8d50-4470-b314-e3e146311093",
+                                            "isOptional": true
+                                        },
+                                        {
+                                            "name": "Version",
+                                            "value": "2.0",
+                                            "isOptional": true
+                                        },
+                                        {
+                                            "name": "TimeRange",
+                                            "value": "P1D",
+                                            "isOptional": true
+                                        },
+                                        {
+                                            "name": "DashboardId",
+                                            "isOptional": true
+                                        },
+                                        {
+                                            "name": "DraftRequestParameters",
+                                            "isOptional": true
+                                        },
+                                        {
+                                            "name": "Query",
+                                            "value": "StorageBlobLogs\n| extend ContainerName = split(parse_url(Uri).Path, \"/\")[1]\n| extend Service = case(RequesterObjectId == '52eb6248-21c0-454d-9550-2dcb66f9d557', 'Data Factory'\n    , RequesterObjectId == '266d7a10-2651-47f0-a7be-7dbf6ce867b9', 'synapse'\n    , 'Unknown')\n| where toint(StatusCode) between (400 .. 599)\n| order by TimeGenerated desc \n| limit 10\n| project TimeGenerated, Service, ContainerName, StatusCode, StatusText, Uri\n\n",
+                                            "isOptional": true
+                                        },
+                                        {
+                                            "name": "ControlType",
+                                            "value": "AnalyticsGrid",
+                                            "isOptional": true
+                                        },
+                                        {
+                                            "name": "SpecificChart",
+                                            "isOptional": true
+                                        },
+                                        {
+                                            "name": "PartTitle",
+                                            "value": "Analytics",
+                                            "isOptional": true
+                                        },
+                                        {
+                                            "name": "PartSubTitle",
+                                            "value": "pollybloganalytics",
+                                            "isOptional": true
+                                        },
+                                        {
+                                            "name": "Dimensions",
+                                            "isOptional": true
+                                        },
+                                        {
+                                            "name": "LegendOptions",
+                                            "isOptional": true
+                                        },
+                                        {
+                                            "name": "IsQueryContainTimeRange",
+                                            "value": false,
+                                            "isOptional": true
+                                        }
+                                    ],
+                                    "type": "Extension/Microsoft_OperationsManagementSuite_Workspace/PartType/LogsDashboardPart",
+                                    "settings": {
+                                        "content": {
+                                            "GridColumnsWidth": {
+                                                "Uri": "1071px",
+                                                "Service": "99px",
+                                                "ContainerName": "152px"
+                                            },
+                                            "Query": "StorageBlobLogs\n| where TimeGenerated > ago(1d)\n| extend ContainerName = split(parse_url(Uri).Path, \"/\")[1]\n| extend Service = case(RequesterObjectId == '52eb6248-21c0-454d-9550-2dcb66f9d557', 'Data Factory'\n    , RequesterObjectId == '266d7a10-2651-47f0-a7be-7dbf6ce867b9', 'synapse'\n    , 'Unknown')\n| where toint(StatusCode) between (400 .. 599)\n| order by TimeGenerated desc \n| project TimeGenerated, Service, ContainerName, StatusCode, StatusText, Uri\n\n",
+                                            "IsQueryContainTimeRange": true
+                                        }
+                                    },
+                                    "partHeader": {
+                                        "title": "Storage Account",
+                                        "subtitle": "Ten Latest Errors"
+                                    }
+                                }
+                            },
+                            "15": {
+                                "position": {
+                                    "x": 38,
+                                    "y": 10,
+                                    "colSpan": 6,
+                                    "rowSpan": 5
+                                },
+                                "metadata": {
+                                    "inputs": [
+                                        {
+                                            "name": "resourceTypeMode",
+                                            "isOptional": true
+                                        },
+                                        {
+                                            "name": "ComponentId",
+                                            "isOptional": true
+                                        },
+                                        {
+                                            "name": "Scope",
+                                            "value": {
+                                                "resourceIds": [
+                                                    "/subscriptions/89bc2ebd-411c-4cd0-96c6-15d201e3a28b/resourcegroups/synapse/providers/microsoft.operationalinsights/workspaces/pollybloganalytics"
+                                                ]
+                                            },
+                                            "isOptional": true
+                                        },
+                                        {
+                                            "name": "PartId",
+                                            "value": "34459eef-4b3f-4fef-a911-7497ec511abc",
+                                            "isOptional": true
+                                        },
+                                        {
+                                            "name": "Version",
+                                            "value": "2.0",
+                                            "isOptional": true
+                                        },
+                                        {
+                                            "name": "TimeRange",
+                                            "value": "P1D",
+                                            "isOptional": true
+                                        },
+                                        {
+                                            "name": "DashboardId",
+                                            "isOptional": true
+                                        },
+                                        {
+                                            "name": "DraftRequestParameters",
+                                            "isOptional": true
+                                        },
+                                        {
+                                            "name": "Query",
+                                            "value": "StorageBlobLogs\n| extend ContainerName = split(parse_url(Uri).Path, \"/\")[1]\n| extend Service = case(RequesterObjectId == '52eb6248-21c0-454d-9550-2dcb66f9d557', 'Data Factory'\n    , RequesterObjectId == '266d7a10-2651-47f0-a7be-7dbf6ce867b9', 'synapse'\n    , 'Unknown')\n| summarize StatusCount = count() by tostring(ContainerName), Service, StatusText\n",
+                                            "isOptional": true
+                                        },
+                                        {
+                                            "name": "ControlType",
+                                            "value": "FrameControlChart",
+                                            "isOptional": true
+                                        },
+                                        {
+                                            "name": "SpecificChart",
+                                            "value": "Pie",
+                                            "isOptional": true
+                                        },
+                                        {
+                                            "name": "PartTitle",
+                                            "value": "Analytics",
+                                            "isOptional": true
+                                        },
+                                        {
+                                            "name": "PartSubTitle",
+                                            "value": "pollybloganalytics",
+                                            "isOptional": true
+                                        },
+                                        {
+                                            "name": "Dimensions",
+                                            "value": {
+                                                "xAxis": {
+                                                    "name": "StatusText",
+                                                    "type": "string"
+                                                },
+                                                "yAxis": [
+                                                    {
+                                                        "name": "StatusCount",
+                                                        "type": "long"
+                                                    }
+                                                ],
+                                                "splitBy": [],
+                                                "aggregation": "Sum"
+                                            },
+                                            "isOptional": true
+                                        },
+                                        {
+                                            "name": "LegendOptions",
+                                            "value": {
+                                                "isEnabled": true,
+                                                "position": "Bottom"
+                                            },
+                                            "isOptional": true
+                                        },
+                                        {
+                                            "name": "IsQueryContainTimeRange",
+                                            "value": false,
+                                            "isOptional": true
+                                        }
+                                    ],
+                                    "type": "Extension/Microsoft_OperationsManagementSuite_Workspace/PartType/LogsDashboardPart",
+                                    "settings": {
+                                        "content": {
+                                            "Query": "StorageBlobLogs\n| extend ContainerName = split(parse_url(Uri).Path, \"/\")[1]\n| extend Service = case(RequesterObjectId == '52eb6248-21c0-454d-9550-2dcb66f9d557', 'Data Factory'\n    , RequesterObjectId == '266d7a10-2651-47f0-a7be-7dbf6ce867b9', 'synapse'\n    , 'Unknown')\n| summarize StatusCount = count() by tostring(ContainerName), Service, StatusText\n\n",
+                                            "LegendOptions": {
+                                                "isEnabled": false,
+                                                "position": "Bottom"
+                                            }
+                                        }
+                                    },
+                                    "partHeader": {
+                                        "title": "Storage Account",
+                                        "subtitle": "Error Distribution"
+                                    }
+                                }
+                            },
+                            "16": {
+                                "position": {
+                                    "x": 44,
+                                    "y": 10,
+                                    "colSpan": 6,
+                                    "rowSpan": 5
+                                },
+                                "metadata": {
+                                    "inputs": [
+                                        {
+                                            "name": "resourceTypeMode",
+                                            "isOptional": true
+                                        },
+                                        {
+                                            "name": "ComponentId",
+                                            "isOptional": true
+                                        },
+                                        {
+                                            "name": "Scope",
+                                            "value": {
+                                                "resourceIds": [
+                                                    "/subscriptions/89bc2ebd-411c-4cd0-96c6-15d201e3a28b/resourcegroups/synapse/providers/microsoft.operationalinsights/workspaces/pollybloganalytics"
+                                                ]
+                                            },
+                                            "isOptional": true
+                                        },
+                                        {
+                                            "name": "PartId",
+                                            "value": "105a2793-8fcd-4958-ac6f-354b089a5f92",
+                                            "isOptional": true
+                                        },
+                                        {
+                                            "name": "Version",
+                                            "value": "2.0",
+                                            "isOptional": true
+                                        },
+                                        {
+                                            "name": "TimeRange",
+                                            "value": "P1D",
+                                            "isOptional": true
+                                        },
+                                        {
+                                            "name": "DashboardId",
+                                            "isOptional": true
+                                        },
+                                        {
+                                            "name": "DraftRequestParameters",
+                                            "isOptional": true
+                                        },
+                                        {
+                                            "name": "Query",
+                                            "value": "StorageBlobLogs\n| where OperationName == 'AppendFile'\n| extend e_Uri = replace_string(Uri, 'https://','')\n| extend e_Uri = replace_string(e_Uri, '%2F', '/')\n| extend e_Uri = split(tolower(e_Uri), '/')\n| extend e_Boundary = array_length(e_Uri) - 1\n| extend e_Directory = array_slice(e_Uri, 1, e_Boundary-1) // 1 includes Container, 2 removes it\n| extend e_Container = e_Uri[1]\n| extend e_File = e_Uri[e_Boundary]\n| extend e_File = iif(e_File !contains '.', '', split(e_File,'?')[0])\n| project OperationName, e_Uri, e_Container, e_Directory, e_File, TimeGenerated\n| mv-expand e_Directory\n| summarize FilesWritten = count() by tostring(e_Directory)\n| order by FilesWritten desc \n| limit 15\n",
+                                            "isOptional": true
+                                        },
+                                        {
+                                            "name": "ControlType",
+                                            "value": "FrameControlChart",
+                                            "isOptional": true
+                                        },
+                                        {
+                                            "name": "SpecificChart",
+                                            "value": "StackedColumn",
+                                            "isOptional": true
+                                        },
+                                        {
+                                            "name": "PartTitle",
+                                            "value": "Analytics",
+                                            "isOptional": true
+                                        },
+                                        {
+                                            "name": "PartSubTitle",
+                                            "value": "pollybloganalytics",
+                                            "isOptional": true
+                                        },
+                                        {
+                                            "name": "Dimensions",
+                                            "value": {
+                                                "xAxis": {
+                                                    "name": "e_Directory",
+                                                    "type": "string"
+                                                },
+                                                "yAxis": [
+                                                    {
+                                                        "name": "FilesWritten",
+                                                        "type": "long"
+                                                    }
+                                                ],
+                                                "splitBy": [],
+                                                "aggregation": "Sum"
+                                            },
+                                            "isOptional": true
+                                        },
+                                        {
+                                            "name": "LegendOptions",
+                                            "value": {
+                                                "isEnabled": true,
+                                                "position": "Bottom"
+                                            },
+                                            "isOptional": true
+                                        },
+                                        {
+                                            "name": "IsQueryContainTimeRange",
+                                            "value": false,
+                                            "isOptional": true
+                                        }
+                                    ],
+                                    "type": "Extension/Microsoft_OperationsManagementSuite_Workspace/PartType/LogsDashboardPart",
+                                    "settings": {
+                                        "content": {
+                                            "PartTitle": "Storage Account",
+                                            "PartSubTitle": "Write Operations by Folder"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "metadata": {
+                    "model": {
+                        "timeRange": {
+                            "value": {
+                                "relative": {
+                                    "duration": 24,
+                                    "timeUnit": 1
+                                }
+                            },
+                            "type": "MsPortalFx.Composition.Configuration.ValueTypes.TimeRange"
+                        },
+                        "filterLocale": {
+                            "value": "en-us"
+                        },
+                        "filters": {
+                            "value": {
+                                "MsPortalFx_TimeRange": {
+                                    "model": {
+                                        "format": "local",
+                                        "granularity": "auto",
+                                        "relative": "30d"
+                                    },
+                                    "displayCache": {
+                                        "name": "Local Time",
+                                        "value": "Past 30 days"
+                                    },
+                                    "filteredPartIds": [
+                                        "StartboardPart-LogsDashboardPart-f6580b4f-d7e4-491d-b94b-3bbe72e1208e",
+                                        "StartboardPart-LogsDashboardPart-f6580b4f-d7e4-491d-b94b-3bbe72e12090",
+                                        "StartboardPart-LogsDashboardPart-f6580b4f-d7e4-491d-b94b-3bbe72e12092",
+                                        "StartboardPart-LogsDashboardPart-f6580b4f-d7e4-491d-b94b-3bbe72e12094",
+                                        "StartboardPart-LogsDashboardPart-f6580b4f-d7e4-491d-b94b-3bbe72e12096",
+                                        "StartboardPart-LogsDashboardPart-f6580b4f-d7e4-491d-b94b-3bbe72e12098",
+                                        "StartboardPart-LogsDashboardPart-f6580b4f-d7e4-491d-b94b-3bbe72e1209a",
+                                        "StartboardPart-LogsDashboardPart-f6580b4f-d7e4-491d-b94b-3bbe72e1209c",
+                                        "StartboardPart-LogsDashboardPart-f6580b4f-d7e4-491d-b94b-3bbe72e1209e",
+                                        "StartboardPart-LogsDashboardPart-f6580b4f-d7e4-491d-b94b-3bbe72e120a0",
+                                        "StartboardPart-LogsDashboardPart-f6580b4f-d7e4-491d-b94b-3bbe72e120a2",
+                                        "StartboardPart-LogsDashboardPart-f6580b4f-d7e4-491d-b94b-3bbe72e120a4",
+                                        "StartboardPart-LogsDashboardPart-f6580b4f-d7e4-491d-b94b-3bbe72e120a6",
+                                        "StartboardPart-LogsDashboardPart-f6580b4f-d7e4-491d-b94b-3bbe72e120a8",
+                                        "StartboardPart-LogsDashboardPart-f6580b4f-d7e4-491d-b94b-3bbe72e120aa"
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    ]
+}
